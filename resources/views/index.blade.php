@@ -35,26 +35,27 @@
         </tr>
         </thead>
         <tbody>
-        @php
-            $i = 0;
-        @endphp
-        @if ($posts)
+        @if ($posts->count() > 0)
             @foreach ($posts as $post)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $post->title }}</td>
+                    <td>{{ $post->body }}</td>
+                    <td>
+                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                            <a class="btn btn-info" href="{{ route('posts.show', $post->id) }}">Show</a>
+                            <a class="btn btn-primary" href="{{ route('posts.edit', $post->id) }}">Edit</a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        @else
             <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $post->title }}</td>
-                <td>{{ $post->body }}</td>
-                <td>
-                    <form action="{{ route('posts.destroy',$post->id) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('posts.show',$post->id) }}">Show</a>
-                        <a class="btn btn-primary" href="{{ route('posts.edit',$post->id) }}">Edit</a>
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
+                <td colspan="4" class="text-center">No posts found.</td>
             </tr>
-        @endforeach
         @endif
         </tbody>
     </table>

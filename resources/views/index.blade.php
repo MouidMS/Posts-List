@@ -8,6 +8,7 @@
 
 <div class="container">
     <h2>Posts List</h2>
+    <p>Welcome {{\Illuminate\Support\Facades\Auth::user()->name}} to your list </p>
     <a class="btn btn-danger" href="{{ route('logout') }}"
        onclick="event.preventDefault();
                  document.getElementById('logout-form').submit();">

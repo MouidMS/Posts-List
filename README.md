@@ -7,7 +7,7 @@
 <p>To install the application, follow these steps:</p>
 
 <ol>
-  <li>Clone the repository: <code>git clone https://github.com/example/posts.git</code></li>
+  <li>Clone the repository: <code>git clone https://github.com/MouidMS/Posts-List.git</code></li>
   <li>Install dependencies: <code>composer install</code></li>
   <li>Create a database and update the <code>.env</code> file with your database credentials</li>
   <li>Run migrations: <code>php artisan migrate</code></li>

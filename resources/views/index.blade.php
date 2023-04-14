@@ -43,9 +43,9 @@
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->body }}</td>
                     <td>
-                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                            <a class="btn btn-info" href="{{ route('posts.show', $post->id) }}">Show</a>
-                            <a class="btn btn-primary" href="{{ route('posts.edit', $post->id) }}">Edit</a>
+                        <form action="{{ route('posts.destroy', $post->uuid) }}" method="POST">
+                            <a class="btn btn-info" href="{{ route('posts.show', $post->uuid) }}">Show</a>
+                            <a class="btn btn-primary" href="{{ route('posts.edit', $post->uuid) }}">Edit</a>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>

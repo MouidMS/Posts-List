@@ -24,4 +24,8 @@ class Post extends Model
         return $this->users()->get();
     }
 
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 }

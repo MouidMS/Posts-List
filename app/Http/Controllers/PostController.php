@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -63,6 +64,7 @@ class PostController extends Controller
 
         $post = new Post($request->all());
         $post->user_id = Auth::user()->id; // set the user_id to the authenticated user's id
+        $post->uuid= Str::uuid();
         $post->save();
 
         return redirect()->route('posts.index')

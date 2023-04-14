@@ -33,6 +33,8 @@
             <th>No</th>
             <th>Title</th>
             <th>Body</th>
+            <th>Deleted_at</th>
+
             <th width="280px">Action</th>
         </tr>
         </thead>
@@ -43,6 +45,8 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->body }}</td>
+                    <td>{{ $post->deleted_at->diffForHumans() }}</td>
+
                     <td>
                         <form action="{{ route('posts.restore', $post->id) }}" method="POST">
                             @csrf

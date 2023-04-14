@@ -1,66 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1>Posts List</h1>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<p>This is a simple CRUD web application for managing posts.</p>
 
-## About Laravel
+<h2>Installation</h2>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p>To install the application, follow these steps:</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<ol>
+  <li>Clone the repository: <code>git clone https://github.com/MouidMS/Posts-List.git</code></li>
+  <li>Install dependencies: <code>composer install</code></li>
+  <li>Create a database and update the <code>.env</code> file with your database credentials</li>
+  <li>Run migrations: <code>php artisan migrate</code></li>
+  <li>Start the server: <code>php artisan serve</code></li>
+  <li>Visit <code>http://localhost:8000/posts</code> to view the list of posts</li>
+</ol>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<h2>Usage</h2>
 
-## Learning Laravel
+<p>To create a new post, click the "Create New Post" button on the Posts List page. Fill out the form and submit it to create the post.</p>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<p>To edit an existing post, click the "Edit" button next to the post you want to edit. Make your changes in the form and submit it to update the post.</p>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<p>To delete a post, click the "Delete" button next to the post you want to delete. Confirm that you want to delete the post when prompted.</p>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<p>To view the details of a post, click the "Show" button next to the post you want to view.</p>
 
-## Laravel Sponsors
+<h2>List of Posts</h2>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<table>
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>My First Post</td>
+      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+      <td>
+        <a href="#">Show</a>
+        <a href="#">Edit</a>
+        <a href="#">Delete</a>
+      </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>My Second Post</td>
+      <td>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
+      <td>
+        <a href="#">Show</a>
+        <a href="#">Edit</a>
+        <a href="#">Delete</a>
+      </td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>My Third Post</td>
+      <td>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
+      <td>
+        <a href="#">Show</a>
+        <a href="#">Edit</a>
+        <a href="#">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

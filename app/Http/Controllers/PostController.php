@@ -9,18 +9,22 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     public function index()
-{
-        if(Auth::user()){
-            $user =Auth::user();
-            $posts=$user->posts;
+    {
+        if (Auth::user()) {
+            $user = Auth::user();
+            $posts = $user->posts;
             return view('index', compact('posts'));
-        }else{
+        } else {
             return redirect()->route('login');
         }
+    }
+    public function trashed()
+    {
+        $trashedPosts = Post::onlyTrashed()->get();
+        return view('trashed', compact('trashedPosts'));
+    }
 
 
-
-}
 
     public function create()
     {

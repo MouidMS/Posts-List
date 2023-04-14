@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Posts List</title>
+    <title>Trashed Posts List</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container">
-    <h2>Posts List</h2>
-    <p>Welcome {{\Illuminate\Support\Facades\Auth::user()->name}} to your list </p>
+    <h2>Trashed Posts List</h2>
+    <p>Welcome {{\Illuminate\Support\Facades\Auth::user()->name}} to your trashed posts list </p>
     <a class="btn btn-danger" href="{{ route('logout') }}"
        onclick="event.preventDefault();
                  document.getElementById('logout-form').submit();">
@@ -18,8 +18,6 @@
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
-    <a class="btn btn-success" href="{{ route('posts.create') }}">Create New Post</a>
-    <a class="btn btn-warning" href="{{ route('posts.trashed') }}">View Trashed Posts</a>
     <br><br>
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -36,26 +34,29 @@
         </tr>
         </thead>
         <tbody>
-        @if ($posts->count() > 0)
-            @foreach ($posts as $post)
+        @if ($trashedPosts->count() > 0)
+            @foreach ($trashedPosts as $post)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->body }}</td>
                     <td>
-                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
-                            <a class="btn btn-info" href="{{ route('posts.show', $post->id) }}">Show</a>
-                            <a class="btn btn-primary" href="{{ route('posts.edit', $post->id) }}">Edit</a>
+                        <form action="{{ route('posts.restore', $post->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn btn-success">Restore</button>
+                        </form>
+                        <form action="{{ route('posts.force-delete', $post->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger">Delete Permanently</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         @else
             <tr>
-                <td colspan="4" class="text-center">No posts found.</td>
+                <td colspan="4" class="text-center">No trashed posts found.</td>
             </tr>
         @endif
         </tbody>

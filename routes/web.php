@@ -19,6 +19,8 @@ Route::get('/', function () {
 });
 
 Route::resource('posts', PostController::class)->middleware('auth');
+Route::get('posts/trashed', [PostController::class,'trashed'])->name('posts.trashed')->middleware('auth');
+
 
 Route::middleware([
     'auth:sanctum',

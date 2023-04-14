@@ -1,71 +1,28 @@
-<h1>Posts List</h1>
+# Posts List
 
-<p>This is a simple CRUD web application for managing posts.</p>
+This is a web application that allows users to create, view, edit, and delete posts.
 
-<h2>Installation</h2>
+## Installation
 
-<p>To install the application, follow these steps:</p>
+1. Clone the repository to your local machine.
+2. Install the required dependencies using `composer install`.
+3. Create a new database for the application.
+4. Copy the `.env.example` file to `.env` and update the `DB_*` variables to match your database configuration.
+5. Run the database migrations using `php artisan migrate`.
+6. Start the development server using `php artisan serve`.
 
-<ol>
-  <li>Clone the repository: <code>git clone https://github.com/MouidMS/Posts-List.git</code></li>
-  <li>Install dependencies: <code>composer install</code></li>
-  <li>Create a database and update the <code>.env</code> file with your database credentials</li>
-  <li>Run migrations: <code>php artisan migrate</code></li>
-  <li>Start the server: <code>php artisan serve</code></li>
-  <li>Visit <code>http://localhost:8000/posts</code> to view the list of posts</li>
-</ol>
+## Usage
 
-<h2>Usage</h2>
+1. Open the application in your web browser at http://localhost:8000.
+2. Log in or register a new account.
+3. From the home page, you can view a list of all posts. You can also click the "Create New Post" button to create a new post.
+4. To view, edit, or delete a post, click the corresponding buttons next to the post in the list.
+5. To view a list of deleted posts, click the "Trashed Posts" button at the top of the page. From there, you can restore or permanently delete individual posts.
 
-<p>To create a new post, click the "Create New Post" button on the Posts List page. Fill out the form and submit it to create the post.</p>
+## Contributing
 
-<p>To edit an existing post, click the "Edit" button next to the post you want to edit. Make your changes in the form and submit it to update the post.</p>
+Contributions are welcome! If you find a bug or would like to suggest an improvement, please open an issue or submit a pull request.
 
-<p>To delete a post, click the "Delete" button next to the post you want to delete. Confirm that you want to delete the post when prompted.</p>
+## License
 
-<p>To view the details of a post, click the "Show" button next to the post you want to view.</p>
-
-<h2>List of Posts</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>No</th>
-      <th>Title</th>
-      <th>Body</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>My First Post</td>
-      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-      <td>
-        <a href="#">Show</a>
-        <a href="#">Edit</a>
-        <a href="#">Delete</a>
-      </td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>My Second Post</td>
-      <td>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-      <td>
-        <a href="#">Show</a>
-        <a href="#">Edit</a>
-        <a href="#">Delete</a>
-      </td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>My Third Post</td>
-      <td>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-      <td>
-        <a href="#">Show</a>
-        <a href="#">Edit</a>
-        <a href="#">Delete</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+This project is licensed under the MIT License. See the `LICENSE` file for details.

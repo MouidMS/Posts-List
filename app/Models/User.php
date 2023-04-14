@@ -61,22 +61,6 @@ class User extends Authenticatable
     ];
 
 //    // Add this relationship method to define the one-to-many relationship between the User and Post models
-//    public function posts()
-//    {
-//        return $this->hasMany(Post::class);
-//    }
-//
-//    // Add this method to retrieve the user's posts
-//    public function getPosts()
-//    {
-//        return $this->posts()->get();
-//    }
-
-
-
-
-
-
 
     public function posts(){
         return $this->hasMany(Post::class);

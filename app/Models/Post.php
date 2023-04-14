@@ -15,11 +15,6 @@ class Post extends Model
     ];
 
     // Add this method to retrieve the user associated with the post
-//    public function user()
-//    {
-//        return $this->belongsTo(User::class);
-//    }
-
     public function users(){
         return $this->hasOne(User::class);
     }

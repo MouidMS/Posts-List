@@ -15,6 +15,9 @@
         {{ __('Logout') }}
     </a>
 
+    <a class="btn btn-success" href="{{ route('posts.index') }}">Posts</a>
+
+
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>

@@ -24,6 +24,19 @@ class PostController extends Controller
         return view('trashed', compact('trashedPosts'));
     }
 
+    public function restore($id)
+    {
+        Post::withTrashed()->find($id)->restore();
+        return redirect()->back()->with('success', 'Post has been restored successfully.');
+    }
+
+    public function forceDelete($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->forceDelete();
+        return redirect()->route('posts.index')->with('success','Post permanently deleted successfully!');
+    }
+
 
 
     public function create()

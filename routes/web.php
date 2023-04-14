@@ -18,9 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('posts', PostController::class)->middleware('auth');
-Route::get('posts/trashed', [PostController::class,'trashed'])->name('posts.trashed')->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('posts', PostController::class);
+    Route::get('/trashed', [PostController::class, 'trashed'])->name('posts.trashed');
+    Route::put('trashed/{id}/restore', [PostController::class, 'restore'])->name('posts.restore')->middleware('auth');
+    Route::delete('/trashed/{id}/force-delete', [PostController::class, 'forceDelete'])->name('posts.force-delete')->middleware('auth');
 
+});
 
 Route::middleware([
     'auth:sanctum',

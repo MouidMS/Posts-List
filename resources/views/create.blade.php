@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create New Post</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
 
-<div class="container">
+@extends('layouts.main')
+
+@section('title','Landpage')
+
+@section('content')
+
     <h2>Create New Post</h2>
     <form action="{{ route('posts.store') }}" method="POST">
         @csrf
@@ -18,9 +16,6 @@
             <label for="body">Body:</label>
             <textarea class="form-control" id="body" name="body"></textarea>
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-success my-3">Submit</button>
     </form>
-</div>
-
-</body>
-</html>
+@endsection

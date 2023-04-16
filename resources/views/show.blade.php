@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Show Post</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
 
-<div class="container">
+@extends('layouts.main')
+
+@section('title','Landpage')
+
+@section('content')
     <h2>Show Post</h2>
     <div class="form-group">
         <label for="title">Title:</label>
@@ -23,7 +20,4 @@
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
     <a class="btn btn-secondary" href="{{ route('posts.index') }}">Back to List</a>
-</div>
-
-</body>
-</html>
+@endsection

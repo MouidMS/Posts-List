@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Trashed Posts List</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
 
-<div class="container">
+@extends('layouts.main')
+
+@section('title','Landpage')
+
+@section('content')
     <h2>Trashed Posts List</h2>
     <p>Welcome {{\Illuminate\Support\Facades\Auth::user()->name}} to your trashed posts list </p>
     <a class="btn btn-danger" href="{{ route('logout') }}"
@@ -68,7 +65,4 @@
         @endif
         </tbody>
     </table>
-</div>
-
-</body>
-</html>
+@endsection

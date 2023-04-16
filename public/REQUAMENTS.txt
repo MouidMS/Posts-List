@@ -1,0 +1,54 @@
+1- Index page :
+	- Navbar
+	- Log in , Log out
+	- Auth
+2- LandPage : 
+	- just simple html
+
+3- Create and Store
+	- Form for write on field.
+	- Auth.
+	- Send to controll
+	- Response in index massege succseful
+4- delete post
+5- soft delete
+
+**you should using tailwind or bootstrap**
+
+
+
+
+-----------------------------------
+
+margin is used to add space around an element. Bootstrap provides a set of margin utility classes that you can use to add margin to your elements.
+
+The margin utility classes in Bootstrap are named based on the direction of the margin and the size of the margin. For example:
+
+"m-1" adds a margin of 0.25rem to all sides of an element.
+"mt-2" adds a margin of 0.5rem to the top of an element.
+"mx-3" adds a margin of 1rem to the left and right sides of an element.
+Here's a breakdown of the different margin utility classes in Bootstrap:
+
+"m" adds margin to all sides of an element.
+"mx" adds margin to the left and right sides of an element.
+"my" adds margin to the top and bottom of an element.
+"mt" adds margin to the top of an element.
+"mb" adds margin to the bottom of an element.
+"ml" adds margin to the left of an element.
+"mr" adds margin to the right of an element.
+You can also use negative margin utility classes in Bootstrap to remove space between elements or to overlap elements.
+
+Overall, margin utility classes in Bootstrap can save you a lot of time when it comes to styling your layout. By using these classes, you can easily add consistent spacing to your elements without having to write custom CSS code.
+
+
+--------------------------------------
+<div class="container pt-3">
+  <h1>Responsive Containers</h1>
+  <p>Resize the browser window to see the effect.</p>
+</div>
+
+<div class="container-sm border">.container-sm</div>
+<div class="container-md mt-3 border">.container-md</div>
+<div class="container-lg mt-3 border">.container-lg</div>
+<div class="container-xl mt-3 border">.container-xl</div>
+<div class="container-xxl mt-3 border">.container-xxl</div>

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\ServiceProvider;
@@ -23,5 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         App::setLocale('ar');
         Lang::setLocale('ar');
+        Paginator::useBootstrap();
+
     }
 }

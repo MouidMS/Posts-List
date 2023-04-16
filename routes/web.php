@@ -15,14 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('landpage');
+})->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('posts', PostController::class);
     Route::get('/trashed', [PostController::class, 'trashed'])->name('posts.trashed');
     Route::put('trashed/{id}/restore', [PostController::class, 'restore'])->name('posts.restore')->middleware('auth');
     Route::delete('/trashed/{id}/force-delete', [PostController::class, 'forceDelete'])->name('posts.force-delete')->middleware('auth');
+    Route::delete('/destroy-all', [PostController::class, 'destroyAll'])->name('posts.destroy-all')->middleware('auth');
 
 });
 

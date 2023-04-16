@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Posts List</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
 
-<div class="container">
+
+
+
+@extends('layouts.main')
+
+@section('title','Landpage')
+
+@section('content')
+
     <h2>Posts List</h2>
     <p>Welcome {{\Illuminate\Support\Facades\Auth::user()->name}} to your list </p>
     <h1>{{ trans('welcome') }}</h1>
@@ -22,13 +23,21 @@
     </form>
     <a class="btn btn-success" href="{{ route('posts.create') }}">Create New Post</a>
     <a class="btn btn-warning" href="{{ route('posts.trashed') }}">View Trashed Posts</a>
+    <a href="{{ route('posts.destroy-all') }}" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-all-form').submit();">
+        Delete All Posts
+    </a>
+
+    <form id="delete-all-form" action="{{ route('posts.destroy-all') }}" method="POST" style="display: none;">
+        @csrf
+        @method('delete')
+    </form>
     <br><br>
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
     @endif
-    <table class="table table-bordered">
+    <table class="table table-striped table-hover">
         <thead>
         <tr>
             <th>No</th>
@@ -42,7 +51,8 @@
         @if ($posts->count() > 0)
             @foreach ($posts as $post)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+
+                    <td>{{ $post->id }}</td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->body }}</td>
                     <td>{{ $post->created_at->diffForHumans() }}</td>
@@ -65,7 +75,12 @@
         @endif
         </tbody>
     </table>
-</div>
 
-</body>
-</html>
+    <div class="d-flex">
+        {!! $posts->links() !!}
+    </div>
+
+    <br><br>
+@endsection
+
+

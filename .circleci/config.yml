@@ -1,19 +1,33 @@
-version: 2.1
+name: Laravel Application
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  build:
-    docker:
-      - image: circleci/php:8.1
-    steps:
-      - checkout
-      - run:
-          name: Install Dependencies
-          command: composer install
-      - run:
-          name: Run Tests
-          command: vendor/bin/phpunit
+  build-and-test:
+    runs-on: ubuntu-latest
 
-workflows:
-  build_and_test:
-    jobs:
-      - build
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0'
+        extensions: gd, mysqli, pdo_mysql, mbstring
+      
+    - name: Install Dependencies
+      run: composer install
+      
+    - name: Run Tests
+      run: vendor/bin/phpunit
+      
+    - name: Check Code Style
+      run: vendor/bin/phpcs
+      
+    - name: Check Code Quality
+      run: vendor/bin/phpstan

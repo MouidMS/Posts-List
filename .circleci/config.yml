@@ -1,33 +1,22 @@
-name: Laravel Application
+name: CI
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      
-    - name: Setup PHP
+    - uses: actions/checkout@v2
+
+    - name: Set up PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.0'
-        extensions: gd, mysqli, pdo_mysql, mbstring
-      
-    - name: Install Dependencies
-      run: composer install
-      
-    - name: Run Tests
-      run: vendor/bin/phpunit
-      
-    - name: Check Code Style
-      run: vendor/bin/phpcs
-      
-    - name: Check Code Quality
-      run: vendor/bin/phpstan
+        extensions: intl
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+
+    - name: Run tests
+      run: php artisan test

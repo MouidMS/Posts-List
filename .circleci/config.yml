@@ -1,22 +1,33 @@
-name: CI
-
-on: [push]
+version: 2
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
 
-    - name: Set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.0'
-        extensions: intl
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+      - name: Run tests
+        run: vendor/bin/phpunit
 
-    - name: Run tests
-      run: php artisan test
+      - name: Create Dummy Artifacts
+        run: |
+          echo "my artifact file" > /tmp/art-1;
+          mkdir /tmp/artifacts;
+          echo "my artifact files in a dir" > /tmp/artifacts/art-2;
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifacts
+          path: |
+            /tmp/art-1
+            /tmp/artifacts

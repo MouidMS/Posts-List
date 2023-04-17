@@ -42,6 +42,16 @@ jobs:
           path: coverage
           destination: coverage
 
+  deploy:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run:
+          name: Deploy to Google App Engine
+          command: |
+            gcloud config set project laravel-10-postlite
+            gcloud app deploy --quiet
+
 workflows:
   version: 2
   build-and-deploy:
@@ -50,7 +60,7 @@ workflows:
           filters:
             branches:
               only: main
-      - deploy-to-production:
+      - deploy:
           requires:
             - build
           filters:

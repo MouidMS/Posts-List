@@ -1,0 +1,53 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/php:8.2.5
+    steps:
+      - checkout
+      - run: cp .env.example .env
+      - run: sudo apt-get update && sudo apt-get install -y unzip
+      - run: composer update
+      - run: composer install
+      - run: php artisan key:generate
+      - run: composer require --dev phpunit/phpunit
+      - run: tar -czvf app.tar.gz .
+
+  deploy:
+    docker:
+      - image: ubuntu:latest
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Install AWS CLI
+          command: |
+            apt-get update
+            apt-get install -y awscli
+      - run:
+          name: Install SSH client
+          command: |
+            apt-get update
+            apt-get install -y ssh
+      - run:
+          name: Copy files to remote server
+          command: |
+            scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa app.tar.gz ubuntu@ec2-54-174-0-169.compute-1.amazonaws.com:~/app.tar.gz
+      - run:
+          name: Extract and Deploy files
+          command: |
+            ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@ec2-54-174-0-169.compute-1.amazonaws.com "rm -rf /var/www/html/*"
+            ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@ec2-54-174-0-169.compute-1.amazonaws.com "tar -xzvf app.tar.gz -C /var/www/html"
+            ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@ec2-54-174-0-169.compute-1.amazonaws.com "cd /var/www/html && composer install --no-dev --optimize-autoloader"
+            ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@ec2-54-174-0-169.compute-1.amazonaws.com "cd /var/www/html && php artisan migrate --force"
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - build

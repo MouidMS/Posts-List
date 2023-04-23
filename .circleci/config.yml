@@ -11,9 +11,7 @@ jobs:
       - run: composer install
       - run: php artisan key:generate
       - run: composer require --dev phpunit/phpunit
-      - run: tar -czvf app.tar.gz . > app.tar.log
-      - run: cat app.tar.log
-
+      - run: tar -czf app.tar.gz --warning=no-file-changed .
 
 
   deploy:

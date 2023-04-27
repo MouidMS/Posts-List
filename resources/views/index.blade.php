@@ -1,7 +1,3 @@
-
-
-
-
 @extends('layouts.main')
 
 @section('title','Landpage')
@@ -43,6 +39,7 @@
             <th>No</th>
             <th>Title</th>
             <th>Body</th>
+            <th>Image</th>
             <th>Created_at</th>
             <th width="280px">Action</th>
         </tr>
@@ -55,6 +52,13 @@
                     <td>{{ $post->id }}</td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->body }}</td>
+                    <td>
+                        @if($post->image)
+                            <img src="{{ Storage::url($post->image) }}" alt="Post Image" style="max-width:100px; max-height:100px;">
+                        @else
+                            No image
+                        @endif
+                    </td>
                     <td>{{ $post->created_at->diffForHumans() }}</td>
 
                     <td>
@@ -82,5 +86,3 @@
 
     <br><br>
 @endsection
-
-

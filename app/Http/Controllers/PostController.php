@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -34,8 +35,19 @@ class PostController extends Controller
         ]);
 
         $post = new Post($request->all());
-        $post->user_id = Auth::user()->id; // set the user_id to the authenticated user's id
-        $post->uuid= Str::uuid();
+        $post->user_id = auth()->user()->id;
+        $post->uuid = Str::uuid();
+        $post->writer = auth()->user()->name;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $name = Str::slug($request->input('title')).'_'.time();
+            $folder = '/uploads/images/';
+            $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
+            $this->uploadOne($image, $folder, 'public', $name);
+            $post->image = $filePath;
+        }
+
         $post->save();
 
         return redirect()->route('posts.index')
@@ -111,4 +123,18 @@ class PostController extends Controller
         return redirect()->route('posts.index')
             ->with('success','All Posts deleted successfully');
     }
+
+    protected function uploadOne(UploadedFile $file, $folder = 'uploads/images', $disk = 'public', $filename = null)
+    {
+        $name = !is_null($filename) ? $filename : str_random(25);
+
+        $file->storeAs(
+            $folder,
+            $name.'.'.$file->getClientOriginalExtension(),
+            $disk
+        );
+
+        return $name.'.'.$file->getClientOriginalExtension();
+    }
+
 }

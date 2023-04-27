@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('body');
             $table->unsignedBigInteger('user_id'); // add user_id column
             $table->timestamps();
+            $table->string('image')->nullable();
             $table->foreign('user_id') // add foreign key constraint
             ->references('id')
                 ->on('users')

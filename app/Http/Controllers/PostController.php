@@ -29,29 +29,31 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        // validate request data
         $request->validate([
             'title' => 'required',
             'body' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
+        // create new post instance with request data
         $post = new Post($request->all());
+
+        // set user_id, uuid, and writer attributes
         $post->user_id = auth()->user()->id;
         $post->uuid = Str::uuid();
         $post->writer = auth()->user()->name;
 
+        // upload image if it exists in the request
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $name = Str::slug($request->input('title')).'_'.time();
-            $folder = '/uploads/images/';
-            $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
-            $this->uploadOne($image, $folder, 'public', $name);
-            $post->image = $filePath;
+            $post->image = $request->file('image')->store('uploads/images', 'public');
         }
 
+        // save post instance
         $post->save();
 
-        return redirect()->route('posts.index')
-            ->with('success','Post created successfully.');
+        // redirect to index page with success message
+        return redirect()->route('posts.index')->with('success','Post created successfully.');
     }
 
 
@@ -122,19 +124,6 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')
             ->with('success','All Posts deleted successfully');
-    }
-
-    protected function uploadOne(UploadedFile $file, $folder = 'uploads/images', $disk = 'public', $filename = null)
-    {
-        $name = !is_null($filename) ? $filename : str_random(25);
-
-        $file->storeAs(
-            $folder,
-            $name.'.'.$file->getClientOriginalExtension(),
-            $disk
-        );
-
-        return $name.'.'.$file->getClientOriginalExtension();
     }
 
 }

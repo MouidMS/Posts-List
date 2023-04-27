@@ -11,7 +11,7 @@ jobs:
       - run: composer install
       - run: php artisan key:generate
       - run: composer require --dev phpunit/phpunit
-      - run: tar -czvf app.tar.gz .
+
 
   deploy:
     docker:
@@ -50,4 +50,4 @@ workflows:
               only: master
       - deploy:
           requires:
-            - build
+            - build 

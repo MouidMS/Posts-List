@@ -6,7 +6,7 @@
 
     <h2>Posts List</h2>
     <p>Welcome {{\Illuminate\Support\Facades\Auth::user()->name}} to your list 😊 </p>
-    <h1>{{ trans('welcome') }}</h1>
+    <h1>{{ ('welcome') }}</h1>
 
     <a class="btn btn-danger" href="{{ route('logout') }}"
        onclick="event.preventDefault();

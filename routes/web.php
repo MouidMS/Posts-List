@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,8 +25,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('trashed/{id}/restore', [PostController::class, 'restore'])->name('posts.restore')->middleware('auth');
     Route::delete('/trashed/{id}/force-delete', [PostController::class, 'forceDelete'])->name('posts.force-delete')->middleware('auth');
     Route::delete('/destroy-all', [PostController::class, 'destroyAll'])->name('posts.destroy-all')->middleware('auth');
-
 });
+
 
 Route::middleware([
     'auth:sanctum',
@@ -36,3 +37,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+Route::post('posts/upload/image',[PostController::class,'UploadImage']);

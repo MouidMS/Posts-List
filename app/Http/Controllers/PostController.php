@@ -33,7 +33,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required',
             'body' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+//            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // create new post instance with request data
@@ -43,17 +43,30 @@ class PostController extends Controller
         $post->user_id = auth()->user()->id;
         $post->uuid = Str::uuid();
         $post->writer = auth()->user()->name;
-
-        // upload image if it exists in the request
-        if ($request->hasFile('image')) {
-            $post->image = $request->file('image')->store('uploads/images', 'public');
-        }
+        $post->image = $request->nameImage;
 
         // save post instance
         $post->save();
 
         // redirect to index page with success message
         return redirect()->route('posts.index')->with('success','Post created successfully.');
+    }
+
+    public function UploadImage(Request $request)
+    {
+        // validate request data
+        $request->validate([
+            'image' => 'image|mimes:png|max:2048',
+        ]);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = $file->getClientOriginalName();
+            $path = $file->storeAs('images/' . Auth::id(), $filename, 's3');
+
+            return response($filename);
+        }
+
+        return response()->json(['error' => 'No file uploaded'], 400);
     }
 
 

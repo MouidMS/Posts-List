@@ -54,7 +54,9 @@
                     <td>{{ $post->body }}</td>
                     <td>
                         @if($post->image)
-                            <img src="{{ Storage::url($post->image) }}" alt="Post Image" style="max-width:100px; max-height:100px;">
+{{--                            <img src="{{ asset("uploads/images/$post->user_id/$post->image") }}" alt="Post Image" style="max-width:100px; max-height:100px;">--}}
+                            <img src="{{ Storage::disk('s3')->url("images/$post->user_id/$post->image") }}" alt="Post Image" style="max-width:100px; max-height:100px;">
+
                         @else
                             No image
                         @endif

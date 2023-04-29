@@ -5,7 +5,7 @@
 @section('content')
 
     <h2>Posts List</h2>
-    <p>Welcome {{\Illuminate\Support\Facades\Auth::user()->name}} to your list </p>
+    <p>Welcome {{\Illuminate\Support\Facades\Auth::user()->name}} to your list 😊 </p>
     <h1>{{ trans('welcome') }}</h1>
 
     <a class="btn btn-danger" href="{{ route('logout') }}"

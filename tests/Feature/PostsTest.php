@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
+use Illuminate\Support\Testing\Fakes\Fake;
 use Tests\TestCase;
 
 class PostsTest extends TestCase
@@ -48,6 +49,7 @@ class PostsTest extends TestCase
             'body' => 'tset',
             'user_id' => $user_id,
             'uuid' => $uuid,
+            'writer'=>auth()->user()->name,
         ]);
 
         $response = $this->get('/posts');
